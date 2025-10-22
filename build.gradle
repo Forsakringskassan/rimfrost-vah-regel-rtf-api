@@ -64,22 +64,11 @@ sourceSets {
 
 dependencies {
 	// Core Jackson dependencies (för JsonProperty, JsonAnySetter, etc.)
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.20.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.20.0'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.20.0'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
 }
 
-configurations.all {
-    resolutionStrategy {
-        // Tvinga alla moduler som ber om Jackson att använda 2.16.1
-        eachDependency { DependencyResolveDetails details ->
-            if (details.requested.group == 'com.fasterxml.jackson.core' ||
-                details.requested.group == 'com.fasterxml.jackson.datatype') {
-                details.useVersion '2.15.4'
-            }
-        }
-    }
-}
 // Se till att koden genereras innan den kompileras
 compileJava.dependsOn generateAsyncApiModels
 
