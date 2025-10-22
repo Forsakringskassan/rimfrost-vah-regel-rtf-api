@@ -6,71 +6,83 @@ info:
 
 channels:
   vah.rtf.requests:
+    address: vah.rtf.requests
     messages:
       VahRtfRequestMessage:
         $ref: '#/components/messages/VahRtfRequestMessage'
+        
   vah.rtf.responses:
+    address: vah.rtf.responses
     messages:
       VahRtfResponseMessage:
         $ref: '#/components/messages/VahRtfResponseMessage'
+
 operations:
-  vahRtfRequest:
+  onVahRtfRequest:
     action: receive
+    summary: Tillämpar regeln och kontrollerar om personen har rätt till Vård av husdjur.
     channel:
       $ref: '#/channels/vah.rtf.requests'
     reply:
       address:
-        description: Topic där response ska skickas
+        description: Resultatet skickas tillbaka till källan.
         location: "$message.header#/replyTo"
       channel:
         $ref: '#/channels/vah.rtf.responses'
+
 components:
   messages:
     VahRtfRequestMessage:
       headers:
-        type: object
-        properties:
-          replyTo:
-            type: string
-            description: Topic där response ska skickas
-          correlationId:
-            type: string
-            description: Unikt id som kopplar ihop request & response
+        $ref: '#/components/schemas/VahRtfRequestHeaders'
       payload:
-        type: object
-        properties:
-          processId:
-            type: string
-            description: Unikt id som identifierar processinstansen
-          personNummer:
-            type: string
-            description: Svenskt personnummer 12 siffror
-            pattern: '^\d{10}-\d{4}$'
-            example: 19990101-0123
-      correlationId:
-        $ref: "#/components/correlationIds/correlationId"
+        $ref: '#/components/schemas/VahRtfRequestPayload'
+
     VahRtfResponseMessage:
       headers:
-        type: object
-        properties:
-          correlationId:
-            type: string
-            description: Unikt id som kopplar ihop request & response
+        $ref: '#/components/schemas/VahRtfResponseHeaders'
       payload:
-        type: object
-        properties:
-          processId:
-            type: string
-            description: Unikt id som identifierar processinstansen
-          personNummer:
-            type: string
-            description: Svenskt personnummer 12 siffror
-            pattern: '^\d{10}-\d{4}$'
-            example: 19990101-0123
-          rattTillForsakring:
-            type: boolean
-            description: Utfall av regel, om personen har rätt till försäkring
-            example: true
-  correlationIds:
-    correlationId:
-      location: '$message.header#/requestId'
+        $ref: '#/components/schemas/VahRtfResponsePayload'
+        
+  schemas:
+    VahRtfRequestHeaders:
+      type: object
+      properties:
+        replyTo:
+          type: string
+          description: Topic där response ska skickas
+        correlationId:
+          type: string
+          description: Unikt id som kopplar ihop request & response
+    VahRtfRequestPayload:
+      type: object
+      properties:
+        processId:
+          type: string
+          description: Unikt id som identifierar processinstansen
+        personNummer:
+          type: string
+          description: Svenskt personnummer 12 siffror
+          pattern: '^\d{10}-\d{4}$'
+          example: 19990101-0123
+    VahRtfResponseHeaders:
+      type: object
+      properties:
+        correlationId:
+          type: string
+          description: Unikt id som kopplar ihop request & response
+    VahRtfResponsePayload:
+      type: object
+      properties:
+        processId:
+          type: string
+          description: Unikt id som identifierar processinstansen
+        personNummer:
+          type: string
+          description: Svenskt personnummer 12 siffror
+          pattern: '^\d{10}-\d{4}$'
+          example: 19990101-0123
+        rattTillForsakring:
+          type: boolean
+          description: Utfall av regel, om personen har rätt till försäkring
+          example: true
