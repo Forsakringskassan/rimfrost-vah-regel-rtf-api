@@ -86,9 +86,6 @@ compileJava.dependsOn generateAsyncApiModels
 publishing {
     publications {
         mavenJava(MavenPublication) {
-            groupId = 'se.fk.asyncapi' // Använd din organisation/grupp-ID
-            artifactId = 'vah-regel-rtf-models' // Ett tydligt namn för artefakten
-            version = '1.0.0-SNAPSHOT'
             from components.java
         }
     }
