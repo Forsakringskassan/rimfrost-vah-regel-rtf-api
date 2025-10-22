@@ -31,3 +31,6 @@ replay_pid*
 
 # Node.js files
 node_modules/
+
+src/generated-source
+src/main/resources/asyncapi.yaml
