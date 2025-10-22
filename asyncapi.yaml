@@ -63,7 +63,7 @@ components:
         personNummer:
           type: string
           description: Svenskt personnummer 12 siffror
-          pattern: '^\d{10}-\d{4}$'
+          pattern: '^\d{8}-\d{4}$'
           example: 19990101-0123
     VahRtfResponseHeaders:
       type: object
@@ -80,7 +80,7 @@ components:
         personNummer:
           type: string
           description: Svenskt personnummer 12 siffror
-          pattern: '^\d{10}-\d{4}$'
+          pattern: '^\d{8}-\d{4}$'
           example: 19990101-0123
         rattTillForsakring:
           type: boolean
