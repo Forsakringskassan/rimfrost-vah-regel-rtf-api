@@ -1,6 +1,6 @@
 asyncapi: 3.0.0
 info:
-  title: Regel Vård av husdjur API
+  title: Regel - Rätt till VAH-försäkring
   version: 1.0.0
   description: Regel för att kontrollera om en person har rätt till Vård av husdjur.
 
@@ -62,7 +62,7 @@ components:
           description: Unikt id som identifierar processinstansen
         personNummer:
           type: string
-          description: Svenskt personnummer 12 siffror
+          description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
           pattern: '^\d{8}-\d{4}$'
           example: 19990101-0123
     VahRtfResponseHeaders:
@@ -79,10 +79,14 @@ components:
           description: Unikt id som identifierar processinstansen
         personNummer:
           type: string
-          description: Svenskt personnummer 12 siffror
+          description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
           pattern: '^\d{8}-\d{4}$'
           example: 19990101-0123
         rattTillForsakring:
-          type: boolean
+          type: string
           description: Utfall av regel, om personen har rätt till försäkring
-          example: true
+          enum:
+            - Ja
+            - Nej
+            - Utredning
+          example: Ja
