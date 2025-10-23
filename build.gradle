@@ -1,92 +1,25 @@
-plugins {
-    // 1. För att köra Node/npm-kommandon
-    id "com.github.node-gradle.node" version "3.5.0"
-    // 2. För Java-funktionalitet och Maven-artefakt
-    id 'java'
-    // 3. För att publicera till GitHub Packages
-    id 'maven-publish'
-}
-
-repositories {
+buildscript {
+  repositories {
 	gradlePluginPortal()
 	mavenCentral()
 	mavenLocal()
 	maven {
-		url = uri("https://maven.pkg.github.com/Forsakringskassan/repository")
-		credentials {
-		username = project.findProperty("GITHUB_ACTOR") ?: System.getenv("GITHUB_ACTOR")
-		password = project.findProperty("GITHUB_TOKEN") ?: System.getenv("GITHUB_TOKEN")
-		}
+	  url = uri("https://maven.pkg.github.com/Forsakringskassan/repository")
+	  credentials {
+        username = project.findProperty("GITHUB_ACTOR") ?: System.getenv("PACKAGES_RW_ACTOR")
+        password = project.findProperty("GITHUB_TOKEN") ?: System.getenv("PACKAGES_RW_TOKEN")
+	  }
 	}
+  }
+
+  dependencies {
+    classpath "se.fk.gradle:gradle-conventions:1.15.2"
+  }
 }
 
-// Konfigurera Node.js och npm (om de inte redan är installerade på systemet)
-node {
-    version = '20.10.0'
-    npmVersion = '10.2.3'
-    download = true // Ladda ner om det behövs
+apply plugin: "se.fk.gradle.bundle-asyncapi"
+
+javaExtension {
+	javaVersion = 21
 }
 
-java {
-    // Explicitly set the Java version for compilation and execution
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
-}
-// Lägg till Modelina CLI som en utvecklingsdependency
-// (Körs endast under byggfasen)
-task installAsyncApiCli(type: NpmTask) {
-    args = ['install', '@asyncapi/cli']
-    inputs.files('package.json') // Se till att den körs om dependencies ändras
-}
-
-// Lägg till en task för att generera koden
-task generateAsyncApiModels(type: NpmTask, dependsOn: installAsyncApiCli) {
-    group = 'asyncapi'
-    description = 'Genererar Java POJOs från AsyncAPI YAML.'
-    
-    // Inmatnings- och utdatakataloger för att definiera när tasken ska köras om
-    inputs.file './asyncapi.yaml'
-    outputs.dir './vah-regel-rtf-spec' 
-
-    // Kommando för att köra AsyncAPI CLI (Modelina)
-    args = ['run', 'generate:models']
-}
-
-// Berätta för Gradle att inkludera den genererade källkoden i kompileringen
-sourceSets {
-    main {
-        java {
-            srcDir 'vah-regel-rtf-spec'
-        }
-    }
-}
-
-dependencies {
-	// Core Jackson dependencies (för JsonProperty, JsonAnySetter, etc.)
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.16.1'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.16.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.16.1'
-}
-
-// Se till att koden genereras innan den kompileras
-compileJava.dependsOn generateAsyncApiModels
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-        }
-    }
-    
-    repositories {
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Forsakringskassan/repository") 
-            credentials {
-                username = project.findProperty("GITHUB_ACTOR") ?: System.getenv("GITHUB_ACTOR")
-                password = project.findProperty("GITHUB_TOKEN") ?: System.getenv("GITHUB_TOKEN")
-            }
-        }
-    }
-}

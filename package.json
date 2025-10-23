@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "@asyncapi/cli": "^3.5.2"
-  },
-  "scripts": {
-    "generate:models": "asyncapi generate models java ./asyncapi.yaml --packageName=se.fk.rimfrost.api -o ./vah-regel-rtf-spec --javaJackson"
-  }
-}

@@ -9,41 +9,41 @@ channels:
     address: vah.rtf.requests
     messages:
       VahRtfRequestMessage:
-        $ref: '#/components/messages/VahRtfRequestMessage'
-        
+        $ref: "#/components/messages/VahRtfRequestMessage"
+
   vah.rtf.responses:
     address: vah.rtf.responses
     messages:
       VahRtfResponseMessage:
-        $ref: '#/components/messages/VahRtfResponseMessage'
+        $ref: "#/components/messages/VahRtfResponseMessage"
 
 operations:
   onVahRtfRequest:
     action: receive
     summary: Tillämpar regeln och kontrollerar om personen har rätt till Vård av husdjur.
     channel:
-      $ref: '#/channels/vah.rtf.requests'
+      $ref: "#/channels/vah.rtf.requests"
     reply:
       address:
         description: Resultatet skickas tillbaka till källan.
         location: "$message.header#/replyTo"
       channel:
-        $ref: '#/channels/vah.rtf.responses'
+        $ref: "#/channels/vah.rtf.responses"
 
 components:
   messages:
     VahRtfRequestMessage:
       headers:
-        $ref: '#/components/schemas/VahRtfRequestHeaders'
+        $ref: "#/components/schemas/VahRtfRequestHeaders"
       payload:
-        $ref: '#/components/schemas/VahRtfRequestPayload'
+        $ref: "#/components/schemas/VahRtfRequestPayload"
 
     VahRtfResponseMessage:
       headers:
-        $ref: '#/components/schemas/VahRtfResponseHeaders'
+        $ref: "#/components/schemas/VahRtfResponseHeaders"
       payload:
-        $ref: '#/components/schemas/VahRtfResponsePayload'
-        
+        $ref: "#/components/schemas/VahRtfResponsePayload"
+
   schemas:
     VahRtfRequestHeaders:
       type: object
