@@ -1,7 +1,7 @@
 asyncapi: 3.0.0
 info:
   title: Regel - Rätt till VAH-försäkring
-  version: 1.0.0
+  version: 1.1.0
   description: Regel för att kontrollera om en person har rätt till Vård av husdjur.
 
 channels:
@@ -36,14 +36,22 @@ components:
       headers:
         $ref: "#/components/schemas/VahRtfRequestHeaders"
       payload:
-        $ref: "#/components/schemas/VahRtfRequestPayload"
-
+        allOf:
+          - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
+          - type: object
+            properties:
+              data:
+                $ref: "#/components/schemas/VahRtfRequestPayload"
     VahRtfResponseMessage:
       headers:
         $ref: "#/components/schemas/VahRtfResponseHeaders"
       payload:
-        $ref: "#/components/schemas/VahRtfResponsePayload"
-
+        allOf:
+          - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
+          - type: object
+            properties:
+              data:
+                $ref: "#/components/schemas/VahRtfResponsePayload"
   schemas:
     VahRtfRequestHeaders:
       type: object
