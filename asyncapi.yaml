@@ -34,26 +34,28 @@ components:
   messages:
     VahRtfRequestMessage:
       headers:
-        $ref: "#/components/schemas/VahRtfRequestHeaders"
+        $ref: "#/components/schemas/VahRtfRequestMessageHeaders"
       payload:
+        title: VahRtfRequestMessagePayload
         allOf:
           - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
           - type: object
             properties:
               data:
-                $ref: "#/components/schemas/VahRtfRequestPayload"
+                $ref: "#/components/schemas/VahRtfRequestMessageData"
     VahRtfResponseMessage:
       headers:
-        $ref: "#/components/schemas/VahRtfResponseHeaders"
+        $ref: "#/components/schemas/VahRtfResponseMessageHeaders"
       payload:
+        title: VahRtfResponseMessagePayload
         allOf:
           - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
           - type: object
             properties:
               data:
-                $ref: "#/components/schemas/VahRtfResponsePayload"
+                $ref: "#/components/schemas/VahRtfResponseMessageData"
   schemas:
-    VahRtfRequestHeaders:
+    VahRtfRequestMessageHeaders:
       type: object
       properties:
         replyTo:
@@ -62,7 +64,8 @@ components:
         correlationId:
           type: string
           description: Unikt id som kopplar ihop request & response
-    VahRtfRequestPayload:
+    VahRtfRequestMessageData:
+      title: VahRtfRequestMessageData
       type: object
       properties:
         processId:
@@ -73,13 +76,14 @@ components:
           description: Svenskt personnummer, 12 siffror med bindestreck (YYYYMMDD-XXXX)
           pattern: '^\d{8}-\d{4}$'
           example: 19990101-0123
-    VahRtfResponseHeaders:
+    VahRtfResponseMessageHeaders:
       type: object
       properties:
         correlationId:
           type: string
           description: Unikt id som kopplar ihop request & response
-    VahRtfResponsePayload:
+    VahRtfResponseMessageData:
+      title: VahRtfResponseMessageData
       type: object
       properties:
         processId:
@@ -91,6 +95,7 @@ components:
           pattern: '^\d{8}-\d{4}$'
           example: 19990101-0123
         rattTillForsakring:
+          title: rattTillForsakring
           type: string
           description: Utfall av regel, om personen har rätt till försäkring
           enum:
