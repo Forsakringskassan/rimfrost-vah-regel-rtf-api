@@ -1,3 +1,12 @@
+## 0.1.0 (2025-11-05)
+
+### Bug Fixes
+
+-  update asyncapi.yaml to generate cloudevent models ([a35ee](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/a35eef2edb9cbd1) Nils Elveros)  
+
+### Other changes
+
+
 ## 1.1.0 (2025-10-31)
 
 ### Added
