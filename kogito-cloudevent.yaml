@@ -5,6 +5,7 @@ components:
       description: Base CloudEvent envelope including Kogito extensions
       properties:
         specversion:
+          title: specVersion
           type: string
           enum: [ "1.0" ]
         id:
@@ -27,6 +28,7 @@ components:
           type: string
           description: Root process instance ID
         kogitoproctype:
+          title: kogitoProcType
           type: string
           description: Process type
           enum: [ "BPMN" ]
