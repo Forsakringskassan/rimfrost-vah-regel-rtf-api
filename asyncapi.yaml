@@ -41,6 +41,10 @@ components:
           - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
           - type: object
             properties:
+              type:
+                type: string
+                const: vah-rtf-requests
+                default: vah-rtf-requests
               data:
                 $ref: "#/components/schemas/VahRtfRequestMessageData"
     VahRtfResponseMessage:
@@ -52,6 +56,10 @@ components:
           - $ref: "kogito-cloudevent.yaml#/components/schemas/KogitoCloudEvent"
           - type: object
             properties:
+              type:
+                type: string
+                const: vah-rtf-responses
+                default: vah-rtf-responses
               data:
                 $ref: "#/components/schemas/VahRtfResponseMessageData"
   schemas:
