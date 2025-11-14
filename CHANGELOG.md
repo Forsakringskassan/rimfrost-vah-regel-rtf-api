@@ -1,3 +1,9 @@
+## 0.2.0 (2025-11-14)
+
+### Features
+
+-  add static topic to asyncapi ([9722a](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/9722a3fb92af350) David Söderberg)  
+
 ## 0.1.1 (2025-11-07)
 
 ### Bug Fixes
