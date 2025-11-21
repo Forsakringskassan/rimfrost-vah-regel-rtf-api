@@ -1,3 +1,20 @@
+## 1.0.0 (2025-11-21)
+
+### Breaking changes
+
+-  update asyncapi to follow new specifications ([953e7](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/953e769adc8bc44) David Söderberg)  
+
+### Bug Fixes
+
+-  update gradle.properties to a proper group ([6b998](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/6b998f73ae7c30e) David Söderberg)  
+-  **deps**  update dependency se.fk.gradle:gradle-conventions to v1.18.1 ([44b4a](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/44b4a4dcc29df75) renovate[bot])  
+
+### Dependency updates
+
+- update gradle to v9.2.0 ([ca2c1](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/ca2c1c41e572672) renovate[bot])  
+### Other changes
+
+
 ## 0.2.0 (2025-11-14)
 
 ### Features
