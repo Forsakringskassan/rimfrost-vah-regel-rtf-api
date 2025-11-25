@@ -40,6 +40,7 @@ components:
           description: Topic där response ska skickas
         correlationId:
           type: string
+          format: uuid
           description: Unikt id som kopplar ihop request & response
 
     RtfMaskinellRequestMessageData:
@@ -48,6 +49,7 @@ components:
       properties:
         kundbehovsflodeId:
           type: string
+          format: uuid
           description: Kundbehovsflöde id
 
     RtfMaskinellResponseMessageHeaders:
@@ -55,6 +57,7 @@ components:
       properties:
         correlationId:
           type: string
+          format: uuid
           description: Unikt id som kopplar ihop request & response
 
     RtfMaskinellResponseMessageData:
@@ -63,6 +66,7 @@ components:
       properties:
         kundbehovsflodeId:
           type: string
+          format: uuid
           description: Kundbehovsflöde id
         rattTillForsakring:
           title: rattTillForsakring
