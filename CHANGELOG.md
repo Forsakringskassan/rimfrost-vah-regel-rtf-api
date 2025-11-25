@@ -1,3 +1,13 @@
+## 1.0.1 (2025-11-25)
+
+### Bug Fixes
+
+-  format cloudevent id as uuid ([872a5](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/872a5c70f06aec7) Nils Elveros)  
+-  format id as uuid ([17dd2](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/17dd2a18c2b4465) Nils Elveros)  
+
+### Dependency updates
+
+- update gradle to v9.2.1 ([06403](https://github.com/Forsakringskassan/rimfrost-vah-regel-rtf-api/commit/06403af9a894ecc) renovate[bot])  
 ## 1.0.0 (2025-11-21)
 
 ### Breaking changes
